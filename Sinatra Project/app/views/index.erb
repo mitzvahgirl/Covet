@@ -1,0 +1,10 @@
+
+<ul>
+    <% @shows.each do |show| %>
+	<li>
+	    <a href="/shows/<%= show.id%>">
+		<%= show.title %>
+	    </a>
+	</li>
+    <% end %>
+</ul>
