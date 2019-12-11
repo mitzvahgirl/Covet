@@ -1,0 +1,1 @@
+class UsersController < Sinatra::Base
