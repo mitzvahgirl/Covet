@@ -10,4 +10,5 @@ use Rack::Session::Cookie
 use SessionsController
 use PostsController
 use UsersController
+use CategoriesController
 run ApplicationController
