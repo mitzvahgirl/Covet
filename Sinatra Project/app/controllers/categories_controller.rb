@@ -1,2 +1,2 @@
-class CategoriesController < Sinatra::Base
+class CategoriesController < ApplicationController
 end

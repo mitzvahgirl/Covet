@@ -1,15 +1,12 @@
+ENV['SINATRA_ENV'] ||= "development"
 require 'bundler/setup'
-Bundler.require
+Bundler.require(:default, ENV['SINATRA_ENV'])
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+configure :development do
+  ActiveRecord::Base.establish_connection(
+    :adapter => "sqlite3",
+    :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
+  )
+end
 
-require_relative '../app/models/show.rb'
-require_relative '../app/controllers/application_controller.rb'
-require_relative '../app/controllers/shows_controller.rb'
-require_relative '../app/controllers/'
-
-use Rack::MethodOverride
-use Rack::Session::Cookie
-use SessionsController
-use PostsController
-use UsersController
-use CategoriesController
-run ApplicationController
+require_all 'app'
