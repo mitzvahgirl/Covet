@@ -11,10 +11,6 @@ class ApplicationController < Sinatra::Base
     erb :'home'
   end
 
-
-
-
-
   helpers do
   
 
