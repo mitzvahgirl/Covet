@@ -8,14 +8,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    # flash[:notice] = "Hooray, Flash is working!"
     erb :'home'
   end
 
   helpers do
-  
-
-  def logged_in?
-    !!session[:email]
+    def logged_in?
+      !!session[:username]
+    end
   end
- end
 end
