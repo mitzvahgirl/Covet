@@ -5,7 +5,8 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
   
 use Rack::MethodOverride
 
-use CategoriesController
-use SessionsController
 use UsersController
+use SessionsController
+use CategoriesController
+use InventoriesController
 run ApplicationController
