@@ -5,21 +5,18 @@ class UsersController < ApplicationController
 
     post "/signup" do
         if params[:password] == params[:password_confirmation]
-            user = User.find_by(username: params[:username])
-            if user && user.authenticate(params[:password])
+            new_user = User.new(name: params[:name], username: params[:username], password: params[:password])
+            if new_user.save
                 session[:username] = params[:username]
-                redirect '/inventories'
+                flash.now[:success] = "User registration success!"
+                redirect '/categories'
             else
-                new_user = User.new(name: params[:name], username: params[:username], password: params[:password])
-                if new_user.save!
-                    session[:username] = params[:username]
-                    redirect '/inventories'
-                else
-                    erb :'users/new'
-                end
+                @errors = new_user.errors
+                flash.now[:error] = "Error in signup"
+                erb :'users/new'
             end
         else
-            @error = 'Passwords not matching'
+            flash.now[:error] = "Passwords not same"
             erb :'users/new'
         end
     end

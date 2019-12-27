@@ -1,5 +1,9 @@
-class ApplicationController < Sinatra::Base
+require 'sinatra/base'
+require 'rack-flash'
 
+class ApplicationController < Sinatra::Base
+  use Rack::Flash
+  
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -8,13 +12,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    # flash[:notice] = "Hooray, Flash is working!"
     erb :'home'
   end
 
   helpers do
-    def logged_in?
-      !!session[:username]
+    def current_user
+      User.find_by(username: session[:username])
     end
   end
 end

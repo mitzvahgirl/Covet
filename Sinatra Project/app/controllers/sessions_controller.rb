@@ -7,8 +7,10 @@ class SessionsController < ApplicationController
         user = User.find_by(username: params[:username])
         if user && user.authenticate(params[:password])
             session[:username] = params[:username]
-            redirect '/inventories'
+            flash.now[:success] = "Signin success"
+            redirect '/categories'
         else
+            flash.now[:error] = "Error in signin"
             redirect '/login'
         end
     end

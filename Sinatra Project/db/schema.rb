@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 3) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "category_id"
+    t.integer "user_id"
+    t.index ["category_id"], name: "index_inventories_on_category_id"
+    t.index ["user_id"], name: "index_inventories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -22,4 +31,6 @@ ActiveRecord::Schema.define(version: 2) do
     t.string "password_digest"
   end
 
+  add_foreign_key "inventories", "categories"
+  add_foreign_key "inventories", "users"
 end

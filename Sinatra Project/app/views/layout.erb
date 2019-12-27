@@ -3,7 +3,21 @@
 <head></head>
 
 <body>
+    <% if session[:username] %>
+        <a href="/logout">Logout</a>
+    <% end %>
    
+    <% flash.keys.each do |type| %>
+        <div data-alert class="flash <%= type %> alert-box radius">
+        <%= flash[type] %>
+        </div>
+    <% end %>
+
+    <% if @errors %>
+        <% @errors.full_messages.each do |msg| %>
+            <p> <%= msg %> </p>
+        <% end %>
+    <% end %>
 
     <%= yield %>
 </body>

@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html>
+  <head>
+  <meta charset='UTF-8' />
+  <title>My Stuff</title>
+</head>
+<body>
+<h1><%=   @category.name  %> </h1>
+
+<a href="/categories/<%= @category.id %>/inventories/new">Add Inventory</a>
+<a href="/categories">All Categories</a>
+
+<% if @category.inventories.length > 0 %>
+  <h1><%= @category.name %> Inventories </h1>
+  <table>
+  <thead>
+    <th>ID</td>
+    <th>Name</td>
+    <th>Description</td>
+    <th>Edit</td>
+    <th>Delete</td>
+  </thead>
+
+  <tbody>
+  <% @category.inventories.each do |inventory| %>
+    <tr>
+      <td><%= inventory.id %></td>
+      <td><%= inventory.name %></td>
+      <td><%= inventory.description %></td>
+      <% if current_user.id == inventory.user_id %>
+      <td><button>Edit</button></td>
+      <td><button>Delete</button></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+<% else %>
+  <h1>No Inventories yet!</h1>
+<% end %>
