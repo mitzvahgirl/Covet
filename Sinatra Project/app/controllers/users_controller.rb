@@ -16,7 +16,7 @@ class UsersController < ApplicationController
                 erb :'users/new'
             end
         else
-            flash.now[:error] = "Passwords not same"
+            flash.now[:error] = "Passwords do not match."
             erb :'users/new'
         end
     end
