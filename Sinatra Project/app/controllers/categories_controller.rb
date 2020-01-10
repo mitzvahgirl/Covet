@@ -1,4 +1,8 @@
 class CategoriesController < ApplicationController
+    before do
+        redirect '/login' unless session[:username]
+    end
+
     get '/categories' do
         @categories = Category.all 
         erb :"categories/index"

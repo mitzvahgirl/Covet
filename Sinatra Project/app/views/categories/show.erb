@@ -20,6 +20,8 @@
     <th>Edit</td>
     <th>Delete</td>
   </thead>
+  
+  <a href="/show">My Stuff</a>
 
   <tbody>
   <% @category.inventories.each do |inventory| %>
@@ -28,8 +30,8 @@
       <td><%= inventory.name %></td>
       <td><%= inventory.description %></td>
       <% if current_user.id == inventory.user_id %>
-      <td><button>Edit</button></td>
-      <td><button>Delete</button></td>
+      <td><a href="/categories/<%= @category.id %>/inventories/<%= inventory.id %>/edit">Edit</a></td>
+      <td><a href="/categories/<%= @category.id %>/inventories/<%= inventory.id %>/delete">Delete</a></td>
       <% end %>
     </tr>
   <% end %>

@@ -1,0 +1,10 @@
+<h1>Edit Inventory</h1>
+
+<form action="/categories/<%= @inventory.category_id %>/inventories/<%= @inventory.id %>" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    Name: <input value="<%= @inventory.name %>" name="name" /> </br>
+    Description: <input value="<%= @inventory.description %>" name="description" /> </br>
+    <button>Update</button>
+</form>
+
+puts

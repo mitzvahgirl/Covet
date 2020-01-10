@@ -1,4 +1,8 @@
 class InventoriesController < ApplicationController
+    before do
+        redirect '/login' unless session[:username]
+    end
+    
     get "/categories/:id/inventories/new" do
         erb :'inventories/new'
     end
@@ -17,20 +21,14 @@ class InventoriesController < ApplicationController
         end
     end
 
-    get "/categories/:id/inventories/:inventory_id/edit" do
-        erb :"categories/edits"
-          inventory = inventory.find(params[:inventory_id])  
-    end
-
    get "/categories/:id/inventories/:inventory_id/edit" do
-         erb :"categories/search"
-         inventory = inventory.find(params[:inventory_id])
+        @inventory = Inventory.find(params[:inventory_id])
+        erb :"inventories/edit"
     end  
-
 
     put "/categories/:id/inventories/:inventory_id" do
         inventory = Inventory.find(params[:inventory_id])
-        if inventory.update_attributes(params)
+        if inventory.update_attributes({name: params[:name], description: params[:description]})
             flash.now[:success] = "inventory updated!"
             redirect "/categories/#{params[:id]}"
         else
@@ -40,10 +38,11 @@ class InventoriesController < ApplicationController
         end        
     end
 
-    delete "/categories/:id/inventories/:inventory_id" do
+    get "/categories/:id/inventories/:inventory_id/delete" do
         inventory = Inventory.find(params[:inventory_id])
         if inventory.destroy
             flash.now[:success] = "inventory deleted!"
+            redirect "/categories/#{params[:id]}"
         else
             @errors = inventory.errors
             flash.now[:error] = "Error deleting inventory"
