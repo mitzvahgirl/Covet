@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
     has_many :inventories
 
     validates :username, uniqueness: true
+    validates :username, presence: true
 end

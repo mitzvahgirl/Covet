@@ -19,5 +19,9 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find_by(username: session[:username])
     end
+  
+    get '/show' do
+      "My Stuff"
+    end
+   end
   end
-end

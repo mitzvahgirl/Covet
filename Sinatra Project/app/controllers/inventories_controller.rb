@@ -19,7 +19,14 @@ class InventoriesController < ApplicationController
 
     get "/categories/:id/inventories/:inventory_id/edit" do
         erb :"categories/edits"
+          inventory = inventory.find(params[:inventory_id])  
     end
+
+   get "/categories/:id/inventories/:inventory_id/edit" do
+         erb :"categories/search"
+         inventory = inventory.find(params[:inventory_id])
+    end  
+
 
     put "/categories/:id/inventories/:inventory_id" do
         inventory = Inventory.find(params[:inventory_id])
